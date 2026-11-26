@@ -239,8 +239,10 @@ internal object OpenAiApiClient {
     }
 
     private fun preservesPlaceholders(source: String, translated: String): Boolean {
+        // Escape both opening and closing braces, and the dollar sign. Without these escapes,
+        // Android's java.util.regex.Pattern treats the braces as malformed quantifiers.
         val pattern = Regex(
-            """%(?:[0-9]+\$)?[-+# 0,(<]*[0-9]*(?:\.[0-9]+)?[a-zA-Z]|\\[nrt]|\{[A-Za-z_][A-Za-z0-9_.-]*}|${'$'}\{[^}]+}|<[^>]{1,80}>"""
+            """%(?:[0-9]+\$)?[-+# 0,(<]*[0-9]*(?:\.[0-9]+)?[a-zA-Z]|\\[nrt]|\{[A-Za-z_][A-Za-z0-9_.-]*\}|\$\{[^}]+\}|<[^>]{1,80}>"""
         )
         fun tokens(value: String): Map<String, Int> = pattern.findAll(value)
             .map { it.value }
