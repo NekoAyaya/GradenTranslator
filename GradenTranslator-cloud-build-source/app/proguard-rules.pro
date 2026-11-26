@@ -1,3 +1,5 @@
--keep class io.github.libxposed.** { *; }
--keep class com.nek0ayaya.gradentranslator.hook.GradenEntry { public <init>(); }
--keepresourcefiles META-INF/xposed/**
+-dontwarn io.github.libxposed.annotation.**
+-adaptresourcefilecontents META-INF/xposed/java_init.list
+-keep,allowoptimization,allowobfuscation public class * extends io.github.libxposed.api.XposedModule {
+    public <init>();
+}
