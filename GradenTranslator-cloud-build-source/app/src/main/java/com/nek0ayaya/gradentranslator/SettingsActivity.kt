@@ -211,7 +211,7 @@ class SettingsActivity : Activity(), GradenTranslatorApp.ConnectionListener {
             setText(value)
             this.hint = hint
             this.inputType = inputType
-            singleLine = true
+            setSingleLine(true)
             textSize = 15f
             root.addView(
                 this,
